@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Checkout - Juan Komerse</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-amber-50 text-gray-800">
+  <div class="p-6 space-y-6 max-w-7xl mx-auto">
+    
+    <!-- Order Summary Panel (LEFT) -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+      <div id="order-summary" class="md:col-span-1 bg-white p-6 rounded shadow sticky top-6 h-fit">
+        <!-- Order summary will be populated by JS -->
+      </div>
+
+      <!-- Shipping, Method, Payment -->
+      <div class="md:col-span-3 grid md:grid-cols-3 gap-6">
+        
+        <!-- ✅ Dynamic Shipping Address -->
+        <div class="bg-white p-4 rounded shadow space-y-2">
+          <div class="flex justify-between items-center mb-2">
+            <h2 class="text-lg font-semibold">Shipping Address</h2>
+            <a href="adress.html" class="text-sm text-blue-600">Change</a>
+          </div>
+          <div id="shippingInfo" class="text-sm space-y-1">
+            Loading shipping address...
+          </div>
+        </div>
+
+        <!-- Shipping Method -->
+        <div class="bg-white p-4 rounded shadow space-y-4">
+          <h2 class="text-lg font-semibold mb-2">Shipping Method</h2>
+          <div class="border-2 border-yellow-500 rounded p-3 space-y-2 hover:bg-orange-100 cursor-pointer shipping-option" onclick="selectShipping(this)">
+            <h3 class="font-bold">Standard Shipping</h3>
+            <p class="text-sm">3–5 business days - <strong>$5.00</strong></p>
+          </div>
+          <div class="border-2 border-yellow-500 rounded p-3 space-y-2 hover:bg-orange-100 cursor-pointer shipping-option" onclick="selectShipping(this)">
+            <h3 class="font-bold">Express Shipping</h3>
+            <p class="text-sm">1–2 business days - <strong>$12.00</strong></p>
+          </div>
+        </div>
+
+        <!-- Payment Method -->
+        <div class="bg-white p-4 rounded shadow space-y-4">
+          <h2 class="text-lg font-semibold">Payment Method</h2>
+          <div class="space-y-3">
+            <div class="p-3 border rounded cursor-pointer hover:bg-orange-100 active:bg-orange-200" onclick="selectPayment(this)">
+              <i class="fas fa-credit-card mr-2"></i> Credit/Debit Card
+              <div class="mt-2 text-sm">
+                <input type="text" placeholder="Card Number" class="w-full border p-1 rounded mb-1">
+                <input type="text" placeholder="CVV" class="w-full border p-1 rounded mb-1">
+                <input type="text" placeholder="Expiry Date (MM/YY)" class="w-full border p-1 rounded mb-1">
+                <input type="text" placeholder="Name on Card" class="w-full border p-1 rounded">
+              </div>
+            </div>
+            <div class="p-3 border rounded cursor-pointer hover:bg-orange-100 active:bg-orange-200" onclick="selectPayment(this)">
+              <i class="fas fa-wallet mr-2"></i> E-Wallet
+            </div>
+            <div class="p-3 border rounded cursor-pointer hover:bg-orange-100 active:bg-orange-200" onclick="selectPayment(this)">
+              <i class="fas fa-university mr-2"></i> Bank Transfer
+            </div>
+            <div class="p-3 border rounded cursor-pointer hover:bg-orange-100 active:bg-orange-200" onclick="selectPayment(this)">
+              <i class="fas fa-money-bill-wave mr-2"></i> Cash on Delivery
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Final Buy Button -->
+    <button class="bg-red-500 hover:bg-red-600 text-white font-semibold px-8 py-3 rounded-full shadow-md transition-all duration-300" onclick="buyNow()">
+      Place Order
+    </button>
+  </div>
+
+  <!-- Confirmation Modal -->
+  <div id="confirmModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex justify-center items-center z-50"> 
+    <div class="bg-white p-6 rounded-xl text-center max-w-md w-full shadow-lg">
+      <h2 class="text-2xl font-bold mb-4">Order Confirmed</h2>
+      <p>Thank you for shopping with Juan Komerse!</p>
+      <button onclick="window.location.href='tracking.html'" class="mt-4 bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-full">
+        Close
+      </button>
+    </div>
+  </div>
+
+  <!-- Load Shipping Info from localStorage -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const addressInfo = JSON.parse(localStorage.getItem('defaultShippingAddress'));
+
+      const container = document.getElementById('shippingInfo');
+      if (!container) return;
+
+      if (addressInfo) {
+        container.innerHTML = `
+          <p><strong>${addressInfo.fullName}</strong></p>
+          <p>${addressInfo.phone}</p>
+          <p>${addressInfo.address1}${addressInfo.address2 ? ', ' + addressInfo.address2 : ''}</p>
+          <p>${addressInfo.city}, ${addressInfo.state} ${addressInfo.postalCode}</p>
+          <p>${addressInfo.country}</p>
+        `;
+      } else {
+        container.textContent = 'No shipping address selected.';
+      }
+    });
+  </script>
+
+  <!-- Main Checkout Scripts -->
+  <script>
+    function loadOrderSummary() {
+      const summaryContainer = document.getElementById('order-summary');
+      const orderHistory = JSON.parse(localStorage.getItem('orderHistory')) || [];
+
+      if (!orderHistory.length) {
+        summaryContainer.innerHTML = '<p class="text-red-600">No recent orders found.</p>';
+        return;
+      }
+
+      const latestOrder = orderHistory[orderHistory.length - 1];
+      let html = `
+        <h2 class="text-xl font-bold mb-2">Order ID: ${latestOrder.id}</h2>
+        <p class="text-sm">Date: ${latestOrder.date}</p>
+        <p class="text-sm mb-2">Status: ${latestOrder.status}</p>
+        <hr class="my-2" />
+      `;
+
+      latestOrder.items.forEach(item => {
+        html += `
+          <div class="mb-2">
+            <p class="font-semibold">${item.name}</p>
+            <p class="text-sm">Qty: ${item.qty}</p>
+            <p class="text-sm text-gray-600">$${(item.qty * item.price).toFixed(2)}</p>
+            <hr class="my-1"/>
+          </div>
+        `;
+      });
+
+      html += `
+        <div class="mt-4">
+          <p>Subtotal: $${getSubtotal(latestOrder.items).toFixed(2)}</p>
+          <p>Tax (12%): $${(getSubtotal(latestOrder.items) * 0.12).toFixed(2)}</p>
+          <p class="font-bold text-lg">Total: ${latestOrder.total}</p>
+        </div>
+      `;
+
+      summaryContainer.innerHTML = html;
+    }
+
+    function getSubtotal(items) {
+      return items.reduce((sum, item) => sum + item.price * item.qty, 0);
+    }
+
+    function buyNow() {
+      document.getElementById('confirmModal').classList.remove('hidden');
+      localStorage.removeItem("cart");
+      setTimeout(() => {
+        window.location.href = "index.html";
+      }, 3000);
+    }
+
+    function selectPayment(element) {
+      document.querySelectorAll(".border-2").forEach(el => el.classList.remove("border-2", "border-green-500"));
+      element.classList.add("border-2", "border-green-500");
+    }
+
+    function selectShipping(element) {
+      document.querySelectorAll(".shipping-option").forEach(el => {
+        el.classList.remove("border-yellow-500", "bg-orange-100");
+        el.classList.add("border");
+      });
+      element.classList.remove("border");
+      element.classList.add("border-yellow-500", "bg-orange-100");
+    }
+
+    document.addEventListener("DOMContentLoaded", loadOrderSummary);
+  </script>
+</body>
+</html>

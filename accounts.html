@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juan Komerse- Account Details</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .account-tab.active {
+            border-bottom: 3px solid #d6932e;
+            color: #cea317;
+            font-weight: 600;
+        }
+        .order-status {
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        .order-status:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0.75rem;
+            height: 0.75rem;
+            border-radius: 50%;
+        }
+        .status-processing:before {
+            background-color: #f59e0b;
+        }
+        .status-shipped:before {
+            background-color: #e49e08;
+        }
+        .status-delivered:before {
+            background-color: #e4ab0de8;
+        }
+        .status-cancelled:before {
+            background-color: #e9830f;
+        }
+    </style>
+</head>
+<body class="bg-amber-50">
+           <a href="index.html" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-maroon-100 text-maroon-800 font-medium">
+  <i class="fas fa-arrow-left"></i>
+  <span>Back</span>
+</a>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="flex items-center justify-between mb-8">
+            <h1 class="text-3xl font-bold text-gray-900">My Account</h1>
+            <div class="flex items-center space-x-4">
+                <span class="text-sm text-gray-500">Welcome back,</span>
+                <span class="font-medium">Guest</span>
+                <div class="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center">
+                    <span class="text-indigo-600 font-medium">Guest</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-col md:flex-row gap-8">
+            <!-- Sidebar Navigation -->
+            <div class="w-full md:w-64 flex-shrink-0">
+                <div class="bg-white rounded-lg shadow-sm p-4">
+                    <nav class="space-y-2">
+                        <a href="#" class="block px-3 py-2 rounded-md bg-indigo-50 text-indigo-700 font-medium">
+                            <i class="fas fa-user-circle mr-2"></i> Account Details
+                        </a>
+                        <a href="tracking.html" class="block px-3 py-2 rounded-md text-gray-700 hover:bg-gray-100">
+                            <i class="fas fa-shopping-bag mr-2"></i> Orders
+                        </a>
+                        <a href="#" class="block px-3 py-2 rounded-md text-gray-700 hover:bg-gray-100">
+                            <i class="fas fa-map-marker-alt mr-2"></i> Addresses
+                        </a>
+                        <a href="login.html" class="block px-3 py-2 rounded-md text-gray-700 hover:bg-gray-100">
+                            <i class="fas fa-sign-out-alt mr-2"></i> Logout
+                        </a>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="flex-1">
+                <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+                    <div class="border-b border-gray-200">
+                        <nav class="flex -mb-px">
+                            <a href="#" class="account-tab active py-4 px-6 text-center border-b-2 font-medium text-sm">
+                                Personal Information
+                            </a>
+                            
+                            
+                        </nav>
+                    </div>
+
+                    <div class="p-6">
+                        <div class="md:grid md:grid-cols-3 md:gap-6">
+                            <div class="md:col-span-1">
+                                <h3 class="text-lg font-medium leading-6 text-gray-900">Profile</h3>
+                                <p class="mt-1 text-sm text-gray-500">
+                                    This information will be displayed publicly so be careful what you share.
+                                </p>
+                            </div>
+                            <div class="mt-5 md:mt-0 md:col-span-2">
+                                <form>
+                                    <div class="space-y-6">
+                                        <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+                                            <div class="sm:col-span-3">
+                                                <label for="Enter your name" class="block text-sm font-medium text-gray-700">First Name</label>
+                                                <div class="mt-1">
+                                                    <input type="text" name="first-name" id="first-name" autocomplete="given-name" value="Name" class="py-2 px-3 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md">
+                                                </div>
+                                            </div>
+
+                                            <div class="sm:col-span-3">
+                                                <label for="last-name" class="block text-sm font-medium text-gray-700">Last name</label>
+                                                <div class="mt-1">
+                                                    <input type="text" name="last-name" id="last-name" autocomplete="family-name" value="last name" class="py-2 px-3 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md">
+                                                </div>
+                                            </div>
+
+                                            <div class="sm:col-span-4">
+                                                <label for="email" class="block text-sm font-medium text-gray-700">Email address</label>
+                                                <div class="mt-1">
+                                                    <input id="email" name="email" type="email" autocomplete="email" value="@example.com" class="py-2 px-3 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md">
+                                                </div>
+                                            </div>
+
+                                            <div class="sm:col-span-4">
+                                                <label for="phone" class="block text-sm font-medium text-gray-700">Phone number</label>
+                                                <div class="mt-1">
+                                                    <input id="phone" name="phone" type="tel" autocomplete="tel" value="+1 (555) 123-4567" class="py-2 px-3 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md">
+                                                </div>
+                                            </div>
+
+                                            <div class="sm:col-span-6">
+                                                <label for="birthday" class="block text-sm font-medium text-gray-700">Date of Birth</label>
+                                                <div class="mt-1">
+                                                    <input id="birthday" name="birthday" type="date" value="1990-01-15" class="py-2 px-3 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="pt-5">
+                                            <div class="flex justify-end">
+                                                <button type="button" class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                                    Cancel
+                                                </button>
+                                                <button onclick="window.location.href='product.html'" type="button"
+  class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+  Save
+</button>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    <script>
+        // Simple tab switching functionality
+        document.querySelectorAll('.account-tab').forEach(tab => {
+            tab.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelectorAll('.account-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

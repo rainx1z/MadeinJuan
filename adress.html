@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shipping Address Management</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .address-card {
+      transition: all 0.3s ease;
+    }
+    .address-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+    .selected-address {
+      border-color: #4f46e5;
+      background-color: #f5f3ff;
+    }
+    .form-input:focus {
+      box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2);
+    }
+    .slide-in {
+      animation: slideIn 0.3s forwards;
+    }
+    @keyframes slideIn {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+  </style>
+</head>
+<body class="bg-amber-50 min-h-screen flex">
+
+  <!-- ✅ Sidebar -->
+  <aside class="w-64 min-h-screen bg-amber-100 shadow-md p-6 flex flex-col space-y-4 fixed">
+    <h2 class="text-xl font-bold text-gray-800 mb-4">Navigation</h2>
+
+    <a href="showcart.html" class="bg-amber-300 hover:bg-gray-400 text-gray-800 px-4 py-2 rounded-lg text-center">
+      ← Back to Cart
+    </a>
+
+    <button id="newAddressBtn" class="bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-lg flex items-center justify-center">
+      <i class="fas fa-plus mr-2"></i> Add New Address
+    </button>
+  </aside>
+
+  <!-- ✅ Main Content -->
+  <div class="ml-64 container mx-auto px-4 py-8 max-w-6xl">
+    <h1 class="text-3xl font-bold text-gray-800 mb-8">Shipping Addresses</h1>
+
+    <!-- Address List -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8" id="addressList"></div>
+
+    <!-- Address Form Modal -->
+    <div id="addressFormContainer" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+      <div class="bg-white rounded-xl p-6 w-full max-w-md slide-in">
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-xl font-semibold text-gray-800" id="formTitle">Add New Address</h2>
+          <button id="closeFormBtn" class="text-gray-500 hover:text-gray-700">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+
+        <form id="addressForm" class="space-y-4">
+          <input type="hidden" id="addressId" value="">
+          <div>
+            <label for="fullName" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+            <input type="text" id="fullName" name="fullName" required class="w-full px-4 py-2 border border-gray-300 rounded-lg form-input">
+          </div>
+          <div>
+            <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+            <input type="tel" id="phone" name="phone" required class="w-full px-4 py-2 border border-gray-300 rounded-lg form-input">
+          </div>
+          <div>
+            <label for="address1" class="block text-sm font-medium text-gray-700 mb-1">Address Line 1</label>
+            <input type="text" id="address1" name="address1" required class="w-full px-4 py-2 border border-gray-300 rounded-lg form-input">
+          </div>
+          <div>
+            <label for="address2" class="block text-sm font-medium text-gray-700 mb-1">Address Line 2 (Optional)</label>
+            <input type="text" id="address2" name="address2" class="w-full px-4 py-2 border border-gray-300 rounded-lg form-input">
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label for="city" class="block text-sm font-medium text-gray-700 mb-1">City</label>
+              <input type="text" id="city" name="city" required class="w-full px-4 py-2 border border-gray-300 rounded-lg form-input">
+            </div>
+            <div>
+              <label for="state" class="block text-sm font-medium text-gray-700 mb-1">State/Province</label>
+              <input type="text" id="state" name="state" required class="w-full px-4 py-2 border border-gray-300 rounded-lg form-input">
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label for="postalCode" class="block text-sm font-medium text-gray-700 mb-1">Postal Code</label>
+              <input type="text" id="postalCode" name="postalCode" required class="w-full px-4 py-2 border border-gray-300 rounded-lg form-input">
+            </div>
+            <div>
+              <label for="country" class="block text-sm font-medium text-gray-700 mb-1">Country</label>
+              <select id="country" name="country" required class="w-full px-4 py-2 border border-gray-300 rounded-lg form-input">
+                <option value="">Select Country</option>
+                <option value="US">United States</option>
+                <option value="CA">Canada</option>
+                <option value="UK">United Kingdom</option>
+                <option value="AU">Australia</option>
+                <option value="JP">Japan</option>
+                <option value="DE">Germany</option>
+              </select>
+            </div>
+          </div>
+          <div class="flex items-center">
+            <input type="checkbox" id="defaultAddress" name="defaultAddress" class="h-4 w-4 text-indigo-600 border-gray-300 rounded">
+            <label for="defaultAddress" class="ml-2 block text-sm text-gray-700">Set as default shipping address</label>
+          </div>
+          <div class="flex justify-end space-x-3 pt-4">
+            <button type="button" id="cancelFormBtn" class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50">
+              Cancel
+            </button>
+            <button type="submit" class="px-6 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700">
+              Save Address
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ✅ JavaScript Logic -->
+  <script>
+    let addresses = [
+      {
+        id: '1',
+        fullName: 'John Doe',
+        phone: '+1 (555) 123-4567',
+        address1: '123 Main Street',
+        address2: 'Apt 4B',
+        city: 'New York',
+        state: 'NY',
+        postalCode: '10001',
+        country: 'US',
+        isDefault: true
+      }
+    ];
+
+    const addressList = document.getElementById('addressList');
+    const addressFormContainer = document.getElementById('addressFormContainer');
+    const addressForm = document.getElementById('addressForm');
+    const newAddressBtn = document.getElementById('newAddressBtn');
+    const closeFormBtn = document.getElementById('closeFormBtn');
+    const cancelFormBtn = document.getElementById('cancelFormBtn');
+    const formTitle = document.getElementById('formTitle');
+    const addressIdField = document.getElementById('addressId');
+
+    function renderAddresses() {
+      addressList.innerHTML = '';
+      addresses.forEach(address => {
+        const card = document.createElement('div');
+        card.className = `address-card bg-white rounded-xl p-6 border-2 ${address.isDefault ? 'selected-address border-indigo-500' : 'border-gray-200'}`;
+        card.innerHTML = `
+          <div class="flex justify-between items-start mb-2">
+            <h3 class="font-medium text-lg">${address.fullName}</h3>
+            ${address.isDefault ? '<span class="bg-indigo-100 text-indigo-800 text-xs px-2 py-1 rounded">Default</span>' : ''}
+          </div>
+          <p class="text-gray-600 mb-1">${address.address1}${address.address2 ? ', ' + address.address2 : ''}</p>
+          <p class="text-gray-600 mb-1">${address.city}, ${address.state} ${address.postalCode}</p>
+          <p class="text-gray-600 mb-4">${getCountryName(address.country)}</p>
+          <p class="text-gray-600 mb-4">${address.phone}</p>
+          <div class="flex space-x-3">
+            <button onclick="editAddress('${address.id}')" class="text-indigo-600 hover:text-indigo-800 text-sm font-medium">
+              <i class="fas fa-edit mr-1"></i> Edit
+            </button>
+            ${!address.isDefault ? `
+              <button onclick="deleteAddress('${address.id}')" class="text-red-600 hover:text-red-800 text-sm font-medium">
+                <i class="fas fa-trash-alt mr-1"></i> Delete
+              </button>
+              <button onclick="setDefaultAddress('${address.id}')" class="text-gray-600 hover:text-gray-800 text-sm font-medium ml-auto">
+                <i class="fas fa-check-circle mr-1"></i> Set as Default
+              </button>` : ''}
+          </div>
+        `;
+        addressList.appendChild(card);
+      });
+    }
+
+    function getCountryName(code) {
+      const countries = {
+        'US': 'United States',
+        'CA': 'Canada',
+        'UK': 'United Kingdom',
+        'AU': 'Australia',
+        'JP': 'Japan',
+        'DE': 'Germany'
+      };
+      return countries[code] || code;
+    }
+
+    function showAddressForm(address = null) {
+      if (address) {
+        formTitle.textContent = 'Edit Address';
+        addressIdField.value = address.id;
+        document.getElementById('fullName').value = address.fullName;
+        document.getElementById('phone').value = address.phone;
+        document.getElementById('address1').value = address.address1;
+        document.getElementById('address2').value = address.address2;
+        document.getElementById('city').value = address.city;
+        document.getElementById('state').value = address.state;
+        document.getElementById('postalCode').value = address.postalCode;
+        document.getElementById('country').value = address.country;
+        document.getElementById('defaultAddress').checked = address.isDefault;
+      } else {
+        formTitle.textContent = 'Add New Address';
+        addressIdField.value = '';
+        addressForm.reset();
+      }
+      addressFormContainer.classList.remove('hidden');
+    }
+
+    function hideAddressForm() {
+      addressFormContainer.classList.add('hidden');
+    }
+
+    function editAddress(id) {
+      const address = addresses.find(a => a.id === id);
+      if (address) showAddressForm(address);
+    }
+
+    function deleteAddress(id) {
+      if (confirm('Are you sure you want to delete this address?')) {
+        addresses = addresses.filter(a => a.id !== id);
+        renderAddresses();
+      }
+    }
+
+    function setDefaultAddress(id) {
+      addresses = addresses.map(a => ({
+        ...a,
+        isDefault: a.id === id
+      }));
+      const defaultAddress = addresses.find(a => a.isDefault);
+      localStorage.setItem('defaultShippingAddress', JSON.stringify(defaultAddress));
+      renderAddresses();
+    }
+
+    addressForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      const addressData = {
+        id: addressIdField.value || Date.now().toString(),
+        fullName: formData.get('fullName'),
+        phone: formData.get('phone'),
+        address1: formData.get('address1'),
+        address2: formData.get('address2'),
+        city: formData.get('city'),
+        state: formData.get('state'),
+        postalCode: formData.get('postalCode'),
+        country: formData.get('country'),
+        isDefault: formData.get('defaultAddress') === 'on'
+      };
+
+      const existingIndex = addresses.findIndex(a => a.id === addressData.id);
+      if (existingIndex >= 0) {
+        addresses[existingIndex] = addressData;
+      } else {
+        addresses.push(addressData);
+      }
+
+      if (addressData.isDefault) {
+        localStorage.setItem('defaultShippingAddress', JSON.stringify(addressData));
+        addresses = addresses.map(a => ({
+          ...a,
+          isDefault: a.id === addressData.id
+        }));
+      }
+
+      renderAddresses();
+      hideAddressForm();
+    });
+
+    newAddressBtn.addEventListener('click', () => showAddressForm());
+    closeFormBtn.addEventListener('click', hideAddressForm);
+    cancelFormBtn.addEventListener('click', hideAddressForm);
+
+    renderAddresses();
+  </script>
+</body>
+</html>

@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juan Komerse | Refund & Return Policy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .bg-gradient-shopease {
+            background: linear-gradient(135deg, #da9f20 0%, #69511b 100%);
+        }
+        .policy-section {
+            transition: all 0.3s ease;
+        }
+        .policy-section:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        .highlight-box {
+            border-left: 4px solid #bba423;
+            background-color: #c9a11c;
+        }
+        .tab-active {
+            border-bottom: 3px solid #d1be16;
+            color: #b4da0f;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="bg-amber-50">
+    <!-- Header -->
+    <header class="bg-gradient-shopease text-white">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex justify-between items-center">
+                <a href="#" class="text-2xl font-bold">Juan Komerse</a>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="index.html" class="hover:underline">Home</a>
+                    <a href="product.html" class="hover:underline">Shop</a>
+                    <a href="about.html" class="hover:underline">About</a>
+                    
+                    <a href="accounts.html" class="flex items-center">
+                        <i class="fas fa-user-circle mr-2"></i> Account
+                    </a>
+                </nav>
+                <button class="md:hidden text-xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-12">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-12">
+                <h1 class="text-4xl font-bold text-gray-800 mb-4">Refund & Return Policy</h1>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    We want you to be completely satisfied with your purchase. Please review our policy below.
+                </p>
+            </div>
+
+            <!-- Policy Navigation Tabs -->
+            <div class="flex border-b mb-8 overflow-x-auto">
+                <button onclick="showSection('returns')" class="tab-btn px-6 py-3 text-sm font-medium tab-active">
+                    Returns
+                </button>
+                <button onclick="showSection('refunds')" class="tab-btn px-6 py-3 text-sm font-medium">
+                    Refunds
+                </button>
+                <button onclick="showSection('exchanges')" class="tab-btn px-6 py-3 text-sm font-medium">
+                    Exchanges
+                </button>
+                <button onclick="showSection('faq')" class="tab-btn px-6 py-3 text-sm font-medium">
+                    FAQ
+                </button>
+            </div>
+
+            <!-- Returns Section -->
+            <section id="returns" class="policy-section bg-white rounded-lg shadow-md p-8 mb-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                    <i class="fas fa-undo-alt text-purple-600 mr-3"></i> Return Policy
+                </h2>
+                
+                <div class="highlight-box p-6 mb-6 rounded">
+                    <h3 class="font-semibold text-lg mb-2">Key Points:</h3>
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li>30-day return policy from date of delivery</li>
+                        <li>Items must be unused, in original packaging with tags attached</li>
+                        <li>Proof of purchase required</li>
+                    </ul>
+                </div>
+                
+                <h3 class="font-semibold text-lg mb-3">How to Return an Item:</h3>
+                <ol class="list-decimal pl-5 space-y-4 mb-6">
+                    <li>
+                        <strong>Initiate your return:</strong> Log in to your account and visit the "My Orders" section to start your return.
+                    </li>
+                    <li>
+                        <strong>Package your item:</strong> Include all original packaging, accessories, and tags. We recommend using the original shipping box if possible.
+                    </li>
+                    <li>
+                        <strong>Ship your return:</strong> Use the prepaid return label provided in your return confirmation email. Drop off at any authorized shipping center.
+                    </li>
+                </ol>
+                
+                <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-6">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-exclamation-circle text-yellow-400"></i>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm text-yellow-700">
+                                <strong>Note:</strong> Some items are final sale and cannot be returned, including clearance items, personalized products, and intimate apparel.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3 class="font-semibold text-lg mb-3">Return Shipping:</h3>
+                <p class="mb-4">We provide free return shipping for all eligible returns within the continental US. International returns are subject to shipping fees.</p>
+            </section>
+
+            <!-- Refunds Section (Hidden by default) -->
+            <section id="refunds" class="policy-section bg-white rounded-lg shadow-md p-8 mb-8 hidden">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                    <i class="fas fa-money-bill-wave text-purple-600 mr-3"></i> Refund Policy
+                </h2>
+                
+                <div class="grid md:grid-cols-2 gap-6 mb-6">
+                    <div class="bg-blue-50 p-6 rounded-lg">
+                        <h3 class="font-semibold text-lg mb-2 text-blue-800">Standard Refunds</h3>
+                        <p>Refunds are processed within 3-5 business days after we receive your return. The refund will be issued to your original payment method.</p>
+                    </div>
+                    <div class="bg-green-50 p-6 rounded-lg">
+                        <h3 class="font-semibold text-lg mb-2 text-green-800">Store Credit</h3>
+                        <p>You may opt for store credit instead of a refund, which will be issued immediately and comes with a 10% bonus credit.</p>
+                    </div>
+                </div>
+                
+                <h3 class="font-semibold text-lg mb-3">Refund Timeline:</h3>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Stage</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Timeframe</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Details</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap">Return Processing</td>
+                                <td class="px-6 py-4 whitespace-nowrap">1-3 business days</td>
+                                <td class="px-6 py-4">After we receive your return</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap">Refund Issued</td>
+                                <td class="px-6 py-4 whitespace-nowrap">Immediately</td>
+                                <td class="px-6 py-4">To original payment method</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap">Funds Available</td>
+                                <td class="px-6 py-4 whitespace-nowrap">3-10 business days</td>
+                                <td class="px-6 py-4">Depends on your bank/credit card</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="mt-6 bg-red-50 border-l-4 border-red-400 p-4">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-times-circle text-red-400"></i>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm text-red-700">
+                                <strong>Non-refundable items:</strong> Gift cards, downloadable software products, and personalized items cannot be refunded.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Exchanges Section (Hidden by default) -->
+            <section id="exchanges" class="policy-section bg-white rounded-lg shadow-md p-8 mb-8 hidden">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                    <i class="fas fa-exchange-alt text-purple-600 mr-3"></i> Exchange Policy
+                </h2>
+                
+                <div class="mb-6">
+                    <h3 class="font-semibold text-lg mb-3">How to Exchange an Item:</h3>
+                    <p class="mb-4">We're happy to exchange items within 30 days of delivery for a different size, color, or style (subject to availability).</p>
+                    
+                    <div class="bg-purple-50 p-6 rounded-lg mb-4">
+                        <h4 class="font-semibold text-purple-800 mb-2">Exchange Process:</h4>
+                        <ol class="list-decimal pl-5 space-y-2">
+                            <li>Contact our customer service team to initiate an exchange</li>
+                            <li>We'll place the new item on hold while you return the original</li>
+                            <li>Once we receive your return, we'll ship the exchanged item</li>
+                        </ol>
+                    </div>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="font-semibold text-lg mb-3">Exchange Shipping:</h3>
+                        <p>Standard exchange shipping is free. Expedited shipping options are available for an additional fee.</p>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-lg mb-3">Price Differences:</h3>
+                        <p>If the new item costs more, you'll pay the difference. If it costs less, we'll refund the difference.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FAQ Section (Hidden by default) -->
+            <section id="faq" class="policy-section bg-white rounded-lg shadow-md p-8 mb-8 hidden">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                    <i class="fas fa-question-circle text-purple-600 mr-3"></i> Frequently Asked Questions
+                </h2>
+                
+                <div class="space-y-4">
+                    <div class="border rounded-lg overflow-hidden">
+                        <button onclick="toggleFAQ('faq1')" class="w-full text-left p-4 bg-gray-50 hover:bg-gray-100 flex justify-between items-center">
+                            <span class="font-medium">How do I check the status of my return?</span>
+                            <i id="faq1-icon" class="fas fa-chevron-down transition-transform"></i>
+                        </button>
+                        <div id="faq1-content" class="hidden p-4 border-t">
+                            <p>You can track your return status by logging into your account and visiting the "My Returns" section. We'll also email you updates at each stage of the process.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="border rounded-lg overflow-hidden">
+                        <button onclick="toggleFAQ('faq2')" class="w-full text-left p-4 bg-gray-50 hover:bg-gray-100 flex justify-between items-center">
+                            <span class="font-medium">What if my item arrives damaged or defective?</span>
+                            <i id="faq2-icon" class="fas fa-chevron-down transition-transform"></i>
+                        </button>
+                        <div id="faq2-content" class="hidden p-4 border-t">
+                            <p>If your item arrives damaged or defective, please contact our customer service team immediately. We'll arrange for a free return and send you a replacement at no additional cost.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="border rounded-lg overflow-hidden">
+                        <button onclick="toggleFAQ('faq3')" class="w-full text-left p-4 bg-gray-50 hover:bg-gray-100 flex justify-between items-center">
+                            <span class="font-medium">Can I return an item purchased as a gift?</span>
+                            <i id="faq3-icon" class="fas fa-chevron-down transition-transform"></i>
+                        </button>
+                        <div id="faq3-content" class="hidden p-4 border-t">
+                            <p>Yes, gift items can be returned within 30 days of purchase. The refund will be issued as store credit to the original purchaser. Please include the gift receipt with your return.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="border rounded-lg overflow-hidden">
+                        <button onclick="toggleFAQ('faq4')" class="w-full text-left p-4 bg-gray-50 hover:bg-gray-100 flex justify-between items-center">
+                            <span class="font-medium">What if I miss the 30-day return window?</span>
+                            <i id="faq4-icon" class="fas fa-chevron-down transition-transform"></i>
+                        </button>
+                        <div id="faq4-content" class="hidden p-4 border-t">
+                            <p>After 30 days, we're unable to accept returns. However, you may contact our customer service team to discuss possible options, which may include store credit at our discretion.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-6 bg-blue-50 border-l-4 border-blue-400 p-4">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-info-circle text-blue-400"></i>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm text-blue-700">
+                                <strong>Need more help?</strong> Contact our customer service team 24/7 at support@shopease.com or call (800) 555-0199.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white pt-12 pb-6">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Juan Komerse</h3>
+                    <p class="text-gray-400">Making online shopping simple, secure, and satisfying since 2015.</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Customer Service</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Contact Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">FAQs</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Shipping Info</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Returns & Exchanges</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">About</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Our Story</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Careers</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Connect With Us</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-pinterest-p"></i></a>
+                    </div>
+                    <div class="mt-4">
+                        <p class="text-gray-400">Subscribe to our newsletter</p>
+                        <div class="flex mt-2">
+                            <input type="email" placeholder="Your email" class="px-3 py-2 rounded-l text-gray-800 w-full">
+                            <button class="bg-purple-600 px-4 py-2 rounded-r"><i class="fas fa-paper-plane"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-6 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm mb-4 md:mb-0">© 2023 Juan Komerse. All rights reserved.</p>
+                <div class="flex space-x-6">
+                    <img src="https://via.placeholder.com/40x25?text=VISA" alt="Visa" class="h-6">
+                    <img src="https://via.placeholder.com/40x25?text=MC" alt="Mastercard" class="h-6">
+                    <img src="https://via.placeholder.com/40x25?text=AMEX" alt="American Express" class="h-6">
+                    <img src="https://via.placeholder.com/40x25?text=PP" alt="PayPal" class="h-6">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Tab functionality
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('[id="returns"], [id="refunds"], [id="exchanges"], [id="faq"]').forEach(section => {
+                section.classList.add('hidden');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.remove('hidden');
+            
+            // Update active tab
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('tab-active');
+            });
+            
+            // Find the button that corresponds to this section
+            let tabBtn;
+            switch(sectionId) {
+                case 'returns': tabBtn = document.querySelector('.tab-btn:nth-child(1)'); break;
+                case 'refunds': tabBtn = document.querySelector('.tab-btn:nth-child(2)'); break;
+                case 'exchanges': tabBtn = document.querySelector('.tab-btn:nth-child(3)'); break;
+                case 'faq': tabBtn = document.querySelector('.tab-btn:nth-child(4)'); break;
+            }
+            
+            if (tabBtn) {
+                tabBtn.classList.add('tab-active');
+            }
+        }
+        
+        // FAQ toggle functionality
+        function toggleFAQ(faqId) {
+            const content = document.getElementById(faqId + '-content');
+            const icon = document.getElementById(faqId + '-icon');
+            
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                icon.classList.remove('fa-chevron-down');
+                icon.classList.add('fa-chevron-up');
+            } else {
+                content.classList.add('hidden');
+                icon.classList.remove('fa-chevron-up');
+                icon.classList.add('fa-chevron-down');
+            }
+        }
+        
+        // Initialize the page with Returns section visible
+        document.addEventListener('DOMContentLoaded', function() {
+            showSection('returns');
+        });
+    </script>
+</body>
+</html>

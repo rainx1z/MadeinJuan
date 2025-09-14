@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Order Tracking | Made in Juan</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .progress-bar {
+      height: 6px;
+      transition: width 0.5s ease;
+    }
+    .order-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body class="bg-[#FFF9E6] text-maroon-800">
+
+  <!-- Header -->
+  <header class="bg-white shadow-sm">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="flex items-center space-x-2">
+        <a href="index.html" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-amber-100 text-maroon-800 font-medium">
+          <i class="fas fa-arrow-left"></i>
+          <span>Back</span>
+        </a>
+        <h1 class="text-xl font-bold text-gray-800 ml-4">Made in Juan</h1>
+      </div>
+      <nav class="hidden md:flex space-x-8">
+        <a href="index.html" class="text-gray-600 hover:text-gray-500">Home</a>
+        <a href="accounts.html" class="text-gray-600 hover:text-gray-500">Account</a>
+      </nav>
+      <div class="flex items-center space-x-4">
+        <button class="p-2 text-gray-600 hover:text-gray-500"><i class="fas fa-search"></i></button>
+        <button class="p-2 text-gray-600 hover:text-gray-500"><i class="fas fa-shopping-cart"></i></button>
+        <button class="md:hidden p-2 text-gray-600"><i class="fas fa-bars"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="container mx-auto px-4 py-8">
+    <div class="flex flex-col md:flex-row gap-8">
+      
+      <!-- Sidebar -->
+      <aside class="w-full md:w-64 bg-amber-100 rounded-lg shadow-sm p-6 h-fit">
+        <div class="flex items-center space-x-3 mb-6">
+          <div class="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center">
+            <i class="fas fa-user text-gray-500"></i>
+          </div>
+          <div>
+            <h3 class="font-medium">Guest</h3>
+          </div>
+        </div>
+        <nav class="space-y-2">
+          <a href="index.html" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-amber-50 text-maroon-800 font-medium">
+            <i class="fas fa-arrow-left"></i>
+            <span>Back</span>
+          </a>
+          <a href="accounts.html" class="block px-3 py-2 rounded-lg text-gray-600 hover:bg-amber-50 hover:text-black-500">
+            <i class="fas fa-user mr-3"></i> My Profile
+          </a>
+          <a href="tracking.html" class="block px-3 py-2 rounded-lg bg-amber-600 text-white">
+            <i class="fas fa-box-open mr-3"></i> My Orders
+          </a>
+          <a href="adress.html" class="block px-3 py-2 rounded-lg text-gray-600 hover:bg-amber-50 hover:text-gray-500">
+            <i class="fas fa-map-marker-alt mr-3"></i> Addresses
+          </a>
+          <a href="login.html" class="block px-3 py-2 rounded-lg text-gray-600 hover:bg-amber-50 hover:text-gray-500">
+            <i class="fas fa-sign-out-alt mr-3"></i> Logout
+          </a>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <section class="flex-1">
+        <div class="bg-amber-50 rounded-lg shadow-sm p-6 mb-6">
+          <h2 class="text-xl font-bold text-gray-800 mb-6">Track Your Order</h2>
+        </div>
+
+        <div id="order-history-cards" class="space-y-6 mt-6"></div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-amber-100 text-gray-400 mt-12">
+    <div class="container mx-auto px-4 py-12">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div>
+          <h3 class="text-lg font-semibold mb-4">Made in Juan</h3>
+          <p class="text-black-400">Best local online market for anything you need — quick and easy.</p>
+        </div>
+        <div>
+          <h3 class="text-lg font-bold mb-4">Shop</h3>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-gray-900 hover:text-gray-400">All Products</a></li>
+            <li><a href="#" class="text-gray-900 hover:text-gray-400">New Arrivals</a></li>
+            <li><a href="#" class="text-gray-900 hover:text-gray-400">Featured</a></li>
+            <li><a href="#" class="text-gray-900 hover:text-gray-400">Deals & Offers</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold mb-4">Customer Service</h3>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-gray-800 hover:text-gray-400">Contact Us</a></li>
+            <li><a href="#" class="text-gray-800 hover:text-gray-400">FAQs</a></li>
+            <li><a href="#" class="text-gray-800 hover:text-gray-400">Shipping Policy</a></li>
+            <li><a href="#" class="text-gray-800 hover:text-gray-400">Returns & Refunds</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold mb-4">Stay Connected</h3>
+          <div class="flex space-x-4 mb-4">
+            <a href="https://www.facebook.com/ken.sortname" class="w-8 h-8 rounded-full bg-amber-700 flex items-center justify-center hover:bg-amber-500"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="w-8 h-8 rounded-full bg-amber-700 flex items-center justify-center hover:bg-amber-500"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="w-8 h-8 rounded-full bg-amber-700 flex items-center justify-center hover:bg-amber-500"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="w-8 h-8 rounded-full bg-amber-700 flex items-center justify-center hover:bg-amber-500"><i class="fab fa-pinterest-p"></i></a>
+          </div>
+          <p class="text-gray-400">Subscribe to our newsletter</p>
+          <div class="mt-2 flex">
+            <input type="email" placeholder="Your email" class="px-3 py-2 bg-gray-700 text-white rounded-l focus:outline-none w-full">
+            <button class="px-4 py-2 bg-amber-500 text-white rounded-r hover:bg-amber-600">
+              <i class="fas fa-paper-plane"></i>
+            </button>
+          </div>
+        </div>s
+      </div>
+      <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400 text-sm">
+        <p>© 2025 Made in Juan. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JS for loading latest order and address -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const orderHistory = JSON.parse(localStorage.getItem('orderHistory')) || [];
+      const container = document.getElementById('order-history-cards');
+      container.innerHTML = '';
+
+      if (orderHistory.length === 0) {
+        container.innerHTML = '<p class="text-center text-gray-500">No previous orders found.</p>';
+        return;
+      }
+
+      // Show only the latest order
+      const order = orderHistory[orderHistory.length - 1];
+
+      let progress = 25;
+      if (order.status.toLowerCase() === 'shipped') progress = 50;
+      else if (order.status.toLowerCase() === 'in transit') progress = 75;
+      else if (order.status.toLowerCase() === 'delivered') progress = 100;
+
+      // Get shipping address from localStorage (or fallback text)
+      const addressInfo = JSON.parse(localStorage.getItem('defaultShippingAddress'));
+
+      const addressHTML = addressInfo
+        ? `
+        <div class="mt-6 p-4 bg-amber-100 rounded shadow-sm text-sm text-gray-700">
+          <h4 class="font-semibold mb-2">Shipping Address</h4>
+          <p><strong>${addressInfo.fullName}</strong></p>
+          <p>${addressInfo.phone}</p>
+          <p>${addressInfo.address1}${addressInfo.address2 ? ', ' + addressInfo.address2 : ''}</p>
+          <p>${addressInfo.city}, ${addressInfo.state} ${addressInfo.postalCode}</p>
+          <p>${addressInfo.country}</p>
+        </div>
+        `
+        : `<p class="text-red-600 mt-6">No shipping address found.</p>`;
+
+      const card = document.createElement('div');
+      card.className = 'bg-white shadow border border-gray-200 rounded-lg p-6';
+      card.innerHTML = `
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+          <div>
+            <h3 class="text-lg font-semibold text-gray-800">Order #${order.id}</h3>
+            <p class="text-sm text-gray-500">Placed on ${order.date}</p>
+          </div>
+          <div class="mt-2 md:mt-0">
+            <span class="px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-black">
+              ${order.status}
+            </span>
+          </div>
+        </div>
+        <div class="mb-4">
+          <div class="flex justify-between text-xs text-gray-500 mb-1">
+            <span>Order Placed</span><span>Shipped</span><span>In Transit</span><span>Delivered</span>
+          </div>
+          <div class="w-full bg-gray-200 rounded-full h-2.5">
+            <div class="bg-green-500 rounded-full h-2.5" style="width: ${progress}%"></div>
+          </div>
+        </div>
+        <div>
+          <h4 class="text-md font-bold text-gray-800 mb-2">Items Ordered:</h4>
+          <ul class="list-disc pl-6 text-sm text-gray-700 space-y-1">
+            ${order.items.map(item => `
+              <li><strong>${item.name}</strong> — ${item.qty} pcs — $${(item.price * item.qty).toFixed(2)}</li>
+            `).join('')}
+          </ul>
+          <div class="mt-2 text-right text-sm text-gray-600 font-semibold">
+            Total: ${order.total}
+          </div>
+        </div>
+        ${addressHTML}
+      `;
+      container.appendChild(card);
+    });
+  </script>
+
+</body>
+</html>
